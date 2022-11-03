@@ -1,11 +1,11 @@
 const path = require("path");
-const fs = require("fs")
+const fs = require("fs");
 
 
-const filePath = path.join(__dirname, "text.txt")
+const filePath = path.join(__dirname, "text.txt");
 
 
-const stream = new fs.ReadStream(filePath, {encoding: "utf-8"})
+const stream = new fs.ReadStream(filePath, {encoding: "utf-8"});
 
 stream.on("readable", () => {
     const data = stream.read()
@@ -17,4 +17,4 @@ stream.on("readable", () => {
 
 stream.on("end", () => {
 
-})
+});

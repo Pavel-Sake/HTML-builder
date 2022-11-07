@@ -6,15 +6,7 @@ const fsPromises = fs.promises
 const filePathToFiles = path.join(__dirname, "files");
 const filePathToFilesCopy = path.join(__dirname, "files-copy");
 
-
-
-
-// fsPromises.copyFile(filePath1, filePath2)
-
-// const projectFolder = new URL(filePath3);
-
 fsPromises.mkdir(filePathToFilesCopy, { recursive: true })
-
 
 fsPromises.readdir(filePathToFiles, {withFileTypes: true})
     .then((results) => {

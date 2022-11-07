@@ -1,28 +1,33 @@
 const path = require("path");
 const fs = require("fs");
 
-const fsPromises = fs.promises
+
 
 const filePathToFiles = path.join(__dirname, "files");
 const filePathToFilesCopy = path.join(__dirname, "files-copy");
 
-fsPromises.mkdir(filePathToFilesCopy, { recursive: true })
 
-fsPromises.readdir(filePathToFiles, {withFileTypes: true})
-    .then((results) => {
+function copyDirectory (filePathToFilesCopy, filePathToFiles) {
 
-        const pathFile = path.join(__dirname, "files", ``)
+    const fsPromises = fs.promises;
+    fsPromises.mkdir(filePathToFilesCopy, { recursive: true })
 
-        results.forEach((item) => {
+    fsPromises.readdir(filePathToFiles, {withFileTypes: true})
+        .then((results) => {
 
-            const fileName = item.name;
-            const pathFileInput = path.join(__dirname, "files", `${fileName}`)
-            const filePathToOutput = path.join(__dirname, "files-copy", `${fileName}`);
+            results.forEach((item) => {
 
-             fsPromises.copyFile(pathFileInput, filePathToOutput)
+                const fileName = item.name;
+                const pathFileInput = path.join(`${filePathToFiles}`, `${fileName}`)
+                const filePathToOutput = path.join(`${filePathToFilesCopy}`, `${fileName}`);
+
+                fsPromises.copyFile(pathFileInput, filePathToOutput)
+            })
+
         })
+        .catch( (error) => {
+            console.log(error);
+        })
+}
 
-    })
-    .catch( (error) => {
-        console.log(error);
-    })
+copyDirectory (filePathToFilesCopy, filePathToFiles)
